@@ -199,7 +199,7 @@ where
 
     #[inline]
     fn serialize_none(self) -> Result<Self::Ok, Self::Error> {
-        Ok(JsNull::new(self.cx).upcast())
+        Ok(JsNull::new().upcast())
     }
 
     #[inline]
@@ -212,12 +212,12 @@ where
 
     #[inline]
     fn serialize_unit(self) -> Result<Self::Ok, Self::Error> {
-        Ok(JsNull::new(self.cx).upcast())
+        Ok(JsNull::new().upcast())
     }
 
     #[inline]
     fn serialize_unit_struct(self, _name: &'static str) -> Result<Self::Ok, Self::Error> {
-        Ok(JsNull::new(self.cx).upcast())
+        Ok(JsNull::new().upcast())
     }
 
     #[inline]
@@ -343,7 +343,7 @@ where
         let value = to_value(self.cx, value)?;
 
         let arr: Handle<'j, JsArray> = self.array;
-        let len = arr.len(self.cx);
+        let len = arr.len();
         arr.set(self.cx, len, value)?;
         Ok(())
     }
