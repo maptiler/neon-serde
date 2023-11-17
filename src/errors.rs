@@ -1,9 +1,7 @@
 //! Defines error handling types used by the create
 //! uses the `error-chain` create for generation
 
-use neon;
 use serde::{de, ser};
-use std::convert::From;
 use std::fmt::Display;
 
 error_chain! {
@@ -58,11 +56,11 @@ error_chain! {
             description("Not Implemented")
             display("Not Implemented: '{}'", name)
         }
-        /// A JS exception was thrown
-        Js(throw: neon::result::Throw) {
-            description("JS exception")
-            display("JS exception")
-        }
+        // /// A JS exception was thrown
+        // Js(throw: neon::result::Throw) {
+        //     description("JS exception")
+        //     display("JS exception")
+        // }
         // failed to convert something to f64
         CastError {
             description("CastError")
@@ -85,6 +83,7 @@ impl de::Error for Error {
 
 impl From<neon::result::Throw> for Error {
     fn from(throw: neon::result::Throw) -> Self {
-        ErrorKind::Js(throw).into()
+        // ErrorKind::Js(throw).into()
+        ErrorKind::Msg(throw.to_string()).into()
     }
 }

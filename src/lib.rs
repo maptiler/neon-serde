@@ -50,6 +50,7 @@
 //!     let arg0_value :AnObject = neon_serde::from_value(&mut cx, arg0)
 //!         .or_else(|e| cx.throw_error(e.to_string()))
 //!         .unwrap();
+//!
 //!     println!("{:?}", arg0_value);
 //!
 //!     Ok(JsUndefined::new().upcast())
